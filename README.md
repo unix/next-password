@@ -1,13 +1,15 @@
+# NextPassword
 
-## Disclaimers
 
-- This project is licensed under the [BSL](./BSL.txt): **You CANNOT use this licensed work for any commercial purposes. (ONLY Personal & Non-Commercial)**. 
+> **Disclaimers**
 
-- For commercial purposes, use the [password protection service](https://vercel.com/docs/concepts/projects/overview#password-protection) provided by the Vercel platform.
+> This project is licensed under the [BSL](./BSL.txt): **You cannot use this licensed work for any commercial purposes. (only personal & non-commercial)**. 
 
-- This is a community open source project, NOT associated with Vercel.
+> For commercial purposes, use the [password protection service](https://vercel.com/docs/concepts/projects/overview#password-protection) provided by the Vercel platform.
 
-- Password protection is not an authentication system, only available for sharing pages with friends. So if you need to secure your data, use [Auth0](https://auth0.com/).
+> This is a community open source project, NOT associated with Vercel.
+
+> Password protection is not an authentication system, only available for sharing pages with friends. So if you need to secure your data, use [Auth0](https://auth0.com/).
 
 ## Guide
 
