@@ -17,6 +17,8 @@
 
 Run `yarn add next-password` to install.
 
+<br/>
+
 ### Initialize
 
 **1. Import to your middleware**
@@ -38,6 +40,8 @@ Create a `auth.tsx` file in the `/pages` directory and fill in the following:
 // pages/auth.tsx
 export { default } from 'next-password'
 ```
+
+<br/>
 
 ### Add your password
 
@@ -82,7 +86,10 @@ module.exports = {
 
 ### Examples
 
-[Here](https://github.com/unix/next-password/blob/master/examples/typescript) is a complete example of a NextJS project for reference.
+- [Full project](https://github.com/unix/next-password/blob/master/examples/typescript): A complete example of a NextJS project for reference
+- Preview: [https://pd.unix.bio](https://pd.unix.bio) (the password is `123`)
+
+<br/>
 
 ## Features
 
@@ -110,6 +117,8 @@ So *NextPassword* provides the most responsive password protection experience in
 The size of the middleware is about `3.9kb`(gzipped), Auth component are approximately `20kb`(gzipped, can be cached).
 
 In addition, *NextPassword* supports server-side rendering styles, please refer to this [full example](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
+
+<br/>
 
 ## Configuration
 
@@ -168,9 +177,8 @@ export default Auth
 | `pageTitle`       | title of login page           | `string`  | `Auth`           |
 | `buttonText`      | text of login button          | `string`  | `Login`          |
 
-## Preview
+<br/>
 
-The password is `123`: [https://pd.unix.bio](https://pd.unix.bio)
 
 ## LICENSE
 
