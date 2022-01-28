@@ -1,4 +1,11 @@
-# NextPassword
+<p align="center" height="370">
+<img align="center" height="370" src="https://user-images.githubusercontent.com/11304944/151491082-c5cd5a37-0fff-4412-891a-bea791045824.png">
+</p>
+<p align="center" height="370">
+<b><i>Next Password</i></b>
+</p>
+
+<br /> 
 
 
 > **Disclaimers**
@@ -23,7 +30,7 @@ Run `yarn add next-password` to install.
 
 **1. Import to your middleware**
 
-Create a `_middleware.ts` file in the `/pages` directory and fill in the following:
+Create a `_middleware.ts` file in the `/pages` directory and fill it:
 
 ```ts
 // pages/_middleware.ts
@@ -34,7 +41,7 @@ export default initPasswordMiddleware('/')
 
 **2. Create Auth page**
 
-Create a `auth.tsx` file in the `/pages` directory and fill in the following:
+Create a `auth.tsx` file in the `/pages` directory and fill it:
 
 ```tsx
 // pages/auth.tsx
@@ -75,9 +82,10 @@ Skip password check in the specified environment.
 
 ```js 
 // next.config.js
+// When developing locally, the env of the "VERCEL_ENV" is empty, so you can skip the password checking.
 module.exports = {
   env: {
-    IGNORE_PASSWORD: process.env.ENVIRONMENT === 'development',
+    IGNORE_PASSWORD: !process.env.VERCEL_ENV,
   }
 });
 ```
@@ -86,7 +94,7 @@ module.exports = {
 
 ### Examples
 
-- [Full project](https://github.com/unix/next-password/blob/master/examples/typescript): A complete example of a NextJS project for reference
+- [Full example](https://github.com/unix/next-password/blob/master/examples/typescript): A complete project on NextJS for reference
 - Preview: [https://pd.unix.bio](https://pd.unix.bio) (the password is `123`)
 
 <br/>
@@ -116,7 +124,7 @@ So *NextPassword* provides the most responsive password protection experience in
 *NextPassword's* edge function code is isolated from the client code, so they don't have to interact with each other at all.
 The size of the middleware is about `3.9kb`(gzipped), Auth component are approximately `20kb`(gzipped, can be cached).
 
-In addition, *NextPassword* supports server-side rendering styles, please refer to this [full example](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
+In addition, *NextPassword* supports server-side rendering styles, refer to [server-render styles](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
 
 <br/>
 
