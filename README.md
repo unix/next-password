@@ -1,12 +1,12 @@
 <p align="center" height="370">
 <img align="center" height="370" src="https://user-images.githubusercontent.com/11304944/151491082-c5cd5a37-0fff-4412-891a-bea791045824.png">
 </p>
-<p align="center" height="370">
+<p align="center">
 <b><i>Next Password</i></b>
 </p>
+<p align="center">Add password protection to your Next.js application. (<code>next > v12.0.0</code>)</p>
 
 <br /> 
-
 
 > **Disclaimers**
 
