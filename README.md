@@ -15,7 +15,7 @@
 
 ### Install
 
-Run `yarn add next-password` to install lib.
+Run `yarn add next-password` to install.
 
 ### Initialize
 
@@ -82,7 +82,7 @@ module.exports = {
 
 ### Examples
 
-[Here]() is a complete example of a NextJS project for reference.
+[Here](https://github.com/unix/next-password/blob/master/examples/typescript) is a complete example of a NextJS project for reference.
 
 ## Features
 
@@ -93,8 +93,6 @@ which prevents most scripts from getting cookies during cross-site attacks. Also
 *NextPassword* will only store the `digest` in the `cookie`, which effectively ensures that your plaintext is not compromised.
 
 In addition, you can also set `salt` to enhance the security of weak passwords. When `salt` is missing, *NextPassword* will generate a hash value of fixed salt.
-
-If your Environment Variables fail to be set, i.e., no password is set, the application will abort.(Unless you manually set it off)
 
 ### Edge
 
@@ -108,9 +106,10 @@ So *NextPassword* provides the most responsive password protection experience in
 
 ### Open design
 
-*NextPassword*'s edge function code is isolated from the client code, so they don't have to interact with each other at all.
-The size of the middleware is about 3.9kb(gzipped), Auth component are approximately 20kb(gzipped, can be cached), 
-Nevertheless, you can customize the minimalist login component, please refer to [this example]().
+*NextPassword's* edge function code is isolated from the client code, so they don't have to interact with each other at all.
+The size of the middleware is about `3.9kb`(gzipped), Auth component are approximately `20kb`(gzipped, can be cached).
+
+In addition, *NextPassword* supports server-side rendering styles, please refer to this [full example](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
 
 ## Configuration
 

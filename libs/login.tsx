@@ -21,6 +21,7 @@ export type LoginProps = {
   cardTitle?: string
   pageTitle?: string
   buttonText?: string
+  serverFlush?: boolean
 }
 
 const defaultProps = {
@@ -32,6 +33,7 @@ const defaultProps = {
   warningText: 'Password is required for login.',
   forbiddenText: 'Password verification failed, please re-enter.',
   buttonText: 'login',
+  serverFlush: false,
 }
 
 const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps> = ({
@@ -44,6 +46,7 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
   forbiddenText,
   warningText,
   buttonText,
+  serverFlush,
 }) => {
   const { bindings, state } = useInput('')
   const ref = useRef<HTMLInputElement | null>(null)
@@ -73,7 +76,11 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
         </Head>
       )}
       <CssBaseline />
-      <Layout title={cardTitle} displayProvided={displayProvided} shadow={shadow}>
+      <Layout
+        serverFlush={serverFlush}
+        title={cardTitle}
+        displayProvided={displayProvided}
+        shadow={shadow}>
         <Grid.Container gap={2}>
           {hasChildren && (
             <Grid xs={24} py={0}>

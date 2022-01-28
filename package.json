@@ -1,6 +1,6 @@
 {
   "name": "next-password",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "module": "index.js",
   "types": "index.d.ts",
@@ -12,6 +12,9 @@
     "build:after": "cp package.json BSL.txt README.md ./dist",
     "release": "yarn build:rollup && yarn build:after && cd dist && yarn publish --access public --non-interactive"
   },
+  "description": "Use password to protect your Next.js application.",
+  "keywords": ["next.js", "password", "protection"],
+  "license": "SEE LICENSE IN BSL.txt",
   "prettier": "@geist-ui/prettier-config",
   "dependencies": {},
   "peerDependencies": {

@@ -6,6 +6,7 @@ type LayoutProps = {
   displayProvided: boolean
   shadow: boolean
   title: string
+  serverFlush: boolean
 }
 
 const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
@@ -13,9 +14,14 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   title,
   displayProvided,
   children,
+  serverFlush,
 }) => {
   return (
-    <Page dotBackdrop width="100%" style={{ boxSizing: 'border-box' }}>
+    <Page
+      render={serverFlush ? 'default' : 'effect'}
+      dotBackdrop
+      width="100%"
+      style={{ boxSizing: 'border-box' }}>
       <form>
         <Grid.Container xs={0} sm={24} height="20vh" />
         <Card
