@@ -40,4 +40,8 @@ yarn-error.log*
 #output
 /dist/
 stats.html
-
+examples/**/yarn.lock
+examples/**/node_modules
+examples/**/.next
+examples/**/build
+examples/**/.vercel
