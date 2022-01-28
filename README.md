@@ -16,19 +16,15 @@
 
 > This is a community open source project, NOT associated with Vercel.
 
-> Password protection is not an authentication system, only available for sharing pages with friends. So if you need to secure your data, use [Auth0](https://auth0.com/).
-
-## Guide
-
-### Install
+## Install
 
 Run `yarn add next-password` to install.
 
 <br/>
 
-### Initialize
+## Initialize
 
-**1. Import to your middleware**
+### 1. Import to middleware
 
 Create a `_middleware.ts` file in the `/pages` directory and fill it:
 
@@ -39,7 +35,7 @@ import { initPasswordMiddleware } from 'next-password/middleware'
 export default initPasswordMiddleware('/')
 ```
 
-**2. Create Auth page**
+### 2. Create login page
 
 Create a `auth.tsx` file in the `/pages` directory and fill it:
 
@@ -50,9 +46,9 @@ export { default } from 'next-password'
 
 <br/>
 
-### Add your password
+## Add your password
 
-#### Default
+### Set environment variable
 
 The initial password for the project is `process.env.PASSWORD`, you can configure this environment variable in two ways:
 
@@ -73,7 +69,7 @@ module.exports = {
 
 </details>
 
-#### Ignore password
+### Ignore password
 
 Skip password check in the specified environment.
 
@@ -92,10 +88,6 @@ module.exports = {
 
 </details>
 
-### Examples
-
-- [Full example](https://github.com/unix/next-password/blob/master/examples/typescript): A complete project on NextJS for reference
-- Preview: [https://pd.unix.bio](https://pd.unix.bio) (the password is `123`)
 
 <br/>
 
@@ -187,6 +179,12 @@ export default Auth
 
 <br/>
 
+### Examples
+
+- [Full example](https://github.com/unix/next-password/blob/master/examples/typescript): A complete project on NextJS for reference
+- Preview: [https://pd.unix.bio](https://pd.unix.bio) (the password is `123`)
+
+<br/>
 
 ## LICENSE
 
