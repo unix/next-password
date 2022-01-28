@@ -1,0 +1,20 @@
+{
+  "name": "next-password-javascript",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "prettier": "@geist-ui/prettier-config",
+  "dependencies": {
+    "next": "12.0.9",
+    "next-password": "latest",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@geist-ui/prettier-config": "^1.0.1",
+    "@types/node": "17.0.12",
+    "@types/react": "17.0.38",
+    "typescript": "4.5.5"
+  }
+}
