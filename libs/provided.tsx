@@ -18,7 +18,10 @@ const Provided: React.FC<ProvidedProps> = ({ visible }) => {
       }}>
       <Text small font="12px">
         Protected by{' '}
-        <a href="">
+        <a
+          rel="noreferrer nofollow"
+          target="_blank"
+          href="https://github.com/unix/next-password">
           <code>next-password</code>
         </a>
       </Text>
