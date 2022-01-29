@@ -115,7 +115,9 @@ So *NextPassword* provides the most responsive password protection experience in
 *NextPassword's* edge function code is isolated from the client code, so they don't have to interact with each other at all.
 The size of the middleware is about `3.9kb`(gzipped), Auth component are approximately `20kb`(gzipped, can be cached).
 
-In addition, *NextPassword* supports server-side rendering styles, refer to [server-render styles](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
+In addition, *NextPassword* supports server-side rendering styles, 
+this allows you to package styles in the first html text to improve the first screen experience,
+or to render metadata for sharing on social media. refer to [server-render styles](https://github.com/unix/next-password/blob/master/examples/with-server-styles).
 
 <br/>
 
@@ -173,7 +175,6 @@ export default Auth
 | `warningText`     | default prompt content        | `string`  | -                |
 | `forbiddenText`   | password error prompt content | `string`  | -                |
 | `cardTitle`       | title of login card           | `string`  | `Authentication` |
-| `pageTitle`       | title of login page           | `string`  | `Auth`           |
 | `buttonText`      | text of login button          | `string`  | `Login`          |
 
 <br/>
