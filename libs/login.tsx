@@ -8,9 +8,10 @@ import {
   GeistProvider,
   CssBaseline,
 } from '@geist-ui/core'
-import { setCookie, getCookie, CONSTANTS } from './utils-client'
+import { CONSTANTS, getRandomString } from './utils-client'
 import Head from 'next/head'
 import Layout from './layout'
+import { md5 } from 'pure-md5'
 
 export type LoginProps = {
   displayProvided?: boolean
@@ -54,17 +55,39 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
   const [loading, setLoading] = useState<boolean>(false)
 
   const hasChildren = React.Children.count(children) > 0
+  const reload = (clearStorage?: boolean) => {
+    setDirty(true)
+    setLoading(false)
+    if (clearStorage) {
+      window.sessionStorage.removeItem(CONSTANTS.COOKIE_NAME)
+    } else {
+      window.sessionStorage.setItem(CONSTANTS.COOKIE_NAME, '1')
+    }
+    location.reload()
+  }
   const login = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     setLoading(true)
-    setCookie(CONSTANTS.COOKIE_NAME, state, 1000 * 60)
-    location.reload()
+    const req = new XMLHttpRequest()
+    req.onreadystatechange = () => {
+      if (req.readyState === XMLHttpRequest.DONE) {
+        const value = `${req.getResponseHeader(CONSTANTS.COOKIE_NAME)}`.toUpperCase()
+        const needClean = value === CONSTANTS.COOKIE_NAME
+        reload(needClean)
+      }
+    }
+    req.onerror = () => reload()
+    req.onabort = () => reload()
+    req.ontimeout = () => reload()
+    req.open('GET', `${location.origin}?q=${getRandomString()}`, false)
+    req.setRequestHeader(CONSTANTS.HEADER_KEY, md5(state))
+    req.send(null)
   }
 
   useEffect(() => {
-    const isDirty = !!getCookie(CONSTANTS.COOKIE_NAME)
-    setDirty(isDirty)
+    const isDirty = window.sessionStorage.getItem(CONSTANTS.COOKIE_NAME)
     if (!ref.current || !isDirty) return
+    setDirty(true)
     ref.current?.focus()
   }, [])
 

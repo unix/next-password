@@ -1,7 +1,6 @@
 export const CONSTANTS = {
   COOKIE_NAME: 'NEXT_PASSWORD',
-  SAVED_COOKIE_NAME: 'NEXT_PASSWORD_SAVED',
-  DIRTY_COOKIE_NAME: 'NEXT_PASSWORD_MSG',
+  HEADER_KEY: 'Authorization',
   MISSING_PD:
     '\n🔓 You are using "next-password", but didn\'t set any password.\n  Refer here to fix -> https://pd.unix.bio/missing',
 }

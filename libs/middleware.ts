@@ -21,6 +21,18 @@ export const defaultOptions: Required<NextPasswordOptions> = {
   salt: 'NEXT_PASSWORD',
 }
 
+const toRelative = (req: NextRequest, pathname: string) => {
+  const url = req.nextUrl.clone()
+  url.pathname = pathname
+  return url
+}
+const clearCookie = (req: NextRequest, res: NextResponse) =>
+  res.clearCookie(CONSTANTS.COOKIE_NAME, {
+    domain: req.nextUrl.hostname,
+    path: '/',
+    httpOnly: true,
+  })
+
 export const initPasswordMiddleware = (
   path: string | string[] = '/',
   options: NextPasswordOptions = {},
@@ -28,28 +40,34 @@ export const initPasswordMiddleware = (
   const paths = Array.isArray(path) ? path : [path]
   const op = mergeOptions(options, defaultOptions)
 
-  const rewrite = () => {
-    return NextResponse.rewrite(`/${op.authComponentName.toLowerCase()}`)
-  }
-  const logout = () => {
-    const res = NextResponse.redirect(paths[0])
-    res.clearCookie(CONSTANTS.COOKIE_NAME)
-    res.clearCookie(CONSTANTS.SAVED_COOKIE_NAME)
-    return res
+  const rewrite = (req: NextRequest) => {
+    const res = NextResponse.rewrite(
+      toRelative(req, `/${op.authComponentName.toLowerCase()}`),
+    )
+    return clearCookie(req, res)
   }
 
   const password = op.password || (() => process.env.PASSWORD)()
-  const ignore = (() => process.env.IGNORE_PASSWORD)()
-  const saltHash = md5(op.salt)
-  if (!ignore && typeof password === 'undefined') {
+  const ignored = (() => process.env.IGNORE_PASSWORD)()
+  if (!ignored && typeof password === 'undefined') {
     throw new Error(CONSTANTS.MISSING_PD)
   }
-  const hash = md5(`${password}${saltHash}`)
+  const saltHash = md5(op.salt)
+  const validateHash = md5(`${password}`)
+  const passwordHash = md5(`${password}${saltHash}`)
 
   return async (req: NextRequest) => {
-    if (ignore) return
+    if (ignored) return
     const pathname = req.nextUrl.pathname
-    if (pathname === op.logoutPath) return logout()
+    const requestHash = req.headers.get(CONSTANTS.HEADER_KEY)
+    const clientHash = req.cookies[CONSTANTS.COOKIE_NAME]
+
+    // return authenticated users ASAP
+    if (pathname === op.logoutPath) {
+      const res = NextResponse.redirect(toRelative(req, path[0]))
+      return clearCookie(req, res)
+    }
+    if (clientHash === passwordHash) return
 
     const hasPath = op.exactMatch
       ? paths.find(p => p === pathname)
@@ -57,25 +75,18 @@ export const initPasswordMiddleware = (
     const isRequiredAuth = hasPath && !!password
     if (!isRequiredAuth) return
 
-    // Confirmed authorizations should be closed ASAP.
-    const saved = req.cookies[CONSTANTS.SAVED_COOKIE_NAME]
-    if (saved === hash) return
+    if (!requestHash) return rewrite(req)
+    if (requestHash !== validateHash) return NextResponse.json(null)
 
-    const auth = req.cookies[CONSTANTS.COOKIE_NAME]
-    if (!auth) return rewrite()
-
-    const authHash = md5(`${auth}${saltHash}`)
-    if (authHash !== hash) return rewrite()
-
-    const res = NextResponse.next()
-    if (auth && !saved) {
-      res.cookie(CONSTANTS.SAVED_COOKIE_NAME, authHash, {
-        maxAge: op.maxAge,
-        httpOnly: true,
-        sameSite: 'strict',
-      })
-      res.clearCookie(CONSTANTS.COOKIE_NAME)
-    }
+    const res = NextResponse.json(null)
+    res.cookie(CONSTANTS.COOKIE_NAME, passwordHash, {
+      domain: req.nextUrl.hostname,
+      path: '/',
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: op.maxAge,
+    })
+    res.headers.set(CONSTANTS.HEADER_KEY, CONSTANTS.HEADER_KEY)
     return res
   }
 }
