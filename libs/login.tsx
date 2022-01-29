@@ -56,13 +56,13 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
 
   const hasChildren = React.Children.count(children) > 0
   const reload = (clearStorage?: boolean) => {
-    setDirty(true)
-    setLoading(false)
     if (clearStorage) {
       window.sessionStorage.removeItem(CONSTANTS.COOKIE_NAME)
     } else {
+      setDirty(true)
       window.sessionStorage.setItem(CONSTANTS.COOKIE_NAME, '1')
     }
+    setLoading(false)
     location.reload()
   }
   const login = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,8 +71,8 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
     const req = new XMLHttpRequest()
     req.onreadystatechange = () => {
       if (req.readyState === XMLHttpRequest.DONE) {
-        const value = `${req.getResponseHeader(CONSTANTS.COOKIE_NAME)}`.toUpperCase()
-        const needClean = value === CONSTANTS.COOKIE_NAME
+        const value = `${req.getResponseHeader(CONSTANTS.HEADER_KEY.toLowerCase())}`
+        const needClean = value.toUpperCase() === CONSTANTS.HEADER_KEY.toUpperCase()
         reload(needClean)
       }
     }
