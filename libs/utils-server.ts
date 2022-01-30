@@ -2,7 +2,7 @@ export const CONSTANTS = {
   COOKIE_NAME: 'NEXT_PASSWORD',
   HEADER_KEY: 'Authorization',
   MISSING_PD:
-    '\n🔓 You are using "next-password", but didn\'t set any password.\n  Refer here to fix -> https://pd.unix.bio/missing',
+    '\n🔓 You are using "next-password", but didn\'t set any password.\n🔓 Refer here to fix -> https://pd.unix.bio/missing',
 }
 
 export const mergeOptions = <T extends Record<string, any>>(
