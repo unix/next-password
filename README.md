@@ -78,12 +78,23 @@ Skip password check in the specified environment.
 
 ```js 
 // next.config.js
-// When developing locally, the env of the "VERCEL_ENV" is empty, so you can skip the password checking.
+// this will remove password in all environments
 module.exports = {
   env: {
-    IGNORE_PASSWORD: !process.env.VERCEL_ENV,
+    IGNORE_PASSWORD: true,
   }
 });
+```
+
+</details>
+
+<details>
+<summary>Ignore password in local</summary>
+
+```js 
+// .env.local
+// when developing locally, you can skip the password checking.
+IGNORE_PASSWORD=true
 ```
 
 </details>

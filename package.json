@@ -22,7 +22,7 @@
   "prettier": "@geist-ui/prettier-config",
   "dependencies": {},
   "peerDependencies": {
-    "next": ">=12.0.0"
+    "next": ">=12.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

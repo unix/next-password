@@ -8,7 +8,6 @@ const nextConfig = {
 
   env: {
     VERSION: require('./package.json').version,
-    // IGNORE_PASSWORD: !process.env.VERCEL_ENV,
   },
 }
 
