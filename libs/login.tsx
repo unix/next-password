@@ -79,7 +79,7 @@ const Login: React.FC<React.PropsWithChildren<LoginProps> & typeof defaultProps>
     req.onerror = () => reload()
     req.onabort = () => reload()
     req.ontimeout = () => reload()
-    req.open('GET', `${location.origin}?q=${getRandomString()}`, false)
+    req.open('GET', `${location.href}?q=${getRandomString()}`, false)
     req.setRequestHeader(CONSTANTS.HEADER_KEY, md5(state))
     req.send(null)
   }
